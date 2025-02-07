@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bestell App</title>
+    <link rel="shortcut icon" href="./assets/icons/favIcon.png" type="image/x-icon">
+
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/menuArray.js"></script>
+    <script src="./scripts/templates.js"></script>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/standard.css">
+    <link rel="stylesheet" href="./styles/menu.css">
+
 </head>
+
 <body>
-    <!--
-    Dateien hochladen:
-    git add .
-    git commit -m "first commit"
-    git push 
+    <!-- git add .  ||  git commit -m "first commit"    ||  git push
 
     ".gitignore" Deatei in vs-code erstellen
     zum anzeigen der Dateien: git status ins terminal eingeben
@@ -18,6 +25,28 @@
     passwörter.txt
     /node modules0,
     -->
-    
+    <div class="mainDiv maxWidth">
+        <header>
+            <div class="headerDiv">
+                <h1>Bestell App</h1>
+                <img src="" alt="Burgermenu">
+            </div>
+        </header>
+
+        <section class="mainSection">
+            <div class="leftSection">
+                <img class="mainImg" src="./assets/img/noodleSoup.png" alt="Noodle Soup">
+                <h1>Paradise Noodles</h1>
+                <h3>Bewertung</h3>
+            </div>
+            <div class="shoppingKart">Warenkorb</div>
+        </section>
+
+        <footer>
+            <div>Christian Pohlschneier</div>
+        </footer>
+    </div>
+
 </body>
+
 </html>

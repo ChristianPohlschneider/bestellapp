@@ -1,0 +1,33 @@
+.headerDiv {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leftSection {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.mainImg {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.shoppingKart {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainSection {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}

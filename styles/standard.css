@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+.maxWidth {
+    width: 1600px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    display: flex;
+    overflow-x: visible;
+}
+
+.mainDiv {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+}
+
+header {
+    background-color: rgb(255, 128, 0);
+    color: white;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    height: 100px;
+    margin-top: auto;
+    background-color: rgb(52, 51, 50);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
