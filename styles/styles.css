@@ -14,12 +14,34 @@
     width: 80%;
     display: flex;
     flex-direction: column;
+    overflow-x: visible;
+}
+
+.leftSectionHeader {
+    display: flex;
     gap: 16px;
+    overflow-x: visible;
+    flex-direction: column;
+}
+
+.h1Header {
+    padding-left: 12px;
 }
 
 .rating {
     color: rgb(255, 128, 0);
     font-weight: bold;
+    padding-left: 12px;
+}
+
+.takeaway {
+    background-color: white;
+    height: 120px;
+    width: 100px;
+    top: 165px;
+    left: calc(40vw - 58px);
+    border-radius: 50%;
+    position: absolute;
 }
 
 .mainImg {
@@ -40,7 +62,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    flex: 1;
+    /* flex: 1; */
 }
 
 .tabDiv {
@@ -50,7 +72,7 @@
     flex-direction: row;
     align-items: center;
     gap: 16px;
-    padding: 8px;
+    padding: 12px;
 }
 
 .arrow {
@@ -59,20 +81,42 @@
 }
 
 .menuDiv {
-padding: 10px;
+    padding: 10px;
+    /* height: 100vh; */
+    overflow-x: visible;
 }
 
 .menuElement {
     display: flex;
-    flex-direction: column;
-    padding: 16px;
+    flex-direction: row;
+    margin-top: 16px;
     gap: 16px;
-    box-shadow: 0px 0px 16px rgb(230, 230, 230);
+    border: 1px solid rgb(230, 230, 230);
+    justify-content: space-between;
 }
 
 .menuTitle {
     display: flex;
-    align-items: center;
-    flex-direction: row;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px;
+    gap: 12px
+}
+
+.addIcon {
+    height: 28px;
+    width: 28px;
+    padding: 5px;
+    border: 1px solid rgb(230, 230, 230);
+    border-width: 0px 0px 1px 1px;
+    position: sticky;
+    top: 0;
+}
+
+.footerDiv {
+    width: 90%;
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+    color: white;
 }

@@ -3,10 +3,11 @@
     margin: 0;
     scroll-behavior: smooth;
     overflow-x: hidden;
+    max-width: 1600px;
 }
 
-.maxWidth {
-    width: 1600px;
+body {
+    height: 100vh;
 }
 
 .center {
@@ -21,14 +22,13 @@ a {
 
 p {
     display: flex;
-    overflow-x: visible;
 }
 
 .mainDiv {
     display: flex;
     background-color: rgb(255, 255, 255);
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    /* height: 100%; */
     flex-direction: column;
 }
 
@@ -46,7 +46,7 @@ footer {
     margin-top: auto;
     background-color: rgb(52, 51, 50);
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-direction: row;
 }
