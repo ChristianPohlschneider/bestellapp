@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body onload="init(0)">
     <!-- git add .  ||  git commit -m "first commit"    ||  git push
 
     ".gitignore" Deatei in vs-code erstellen
@@ -53,25 +53,25 @@
                     <div class="tabDiv">
                         <img class="arrow" src="./assets/icons/arrow.png" alt="Arrow">
                         <div>
-                            <h3>Pizza</h3>
+                            <h3 class="menuButton" onclick="renderMenu(0)">Vorspeisen</h3>
                         </div>
                         <div>
-                            <h3>Beilagen</h3>
+                            <h3 class="menuButton" onclick="renderMenu(1)">Hauptspeisen</h3>
+                        </div>
+                        <div>
+                            <h3 class="menuButton" onclick="renderMenu(2)">Dessert</h3>
                         </div>
                     </div>
                 </div>
 
                 <div class="menuDiv" id="menuDiv">
                     <img class="mainImg" src="./assets/img/food.jpg" alt="">
-                    <h2>Pizza</h2>
+                    <h2 id="tabTitle">Pizza</h2>
 
-                    <div class="menuElement">
-                        <div class="menuTitle">
-                            <h2>Margherita</h2>
-                            <h3>mit Käse</h3>
-                            <h3>10.49</h3>
-                        </div>
-                        <img class="addIcon" src="./assets/icons/plus.png" alt="Add">
+                    <div id="tabMenuElement">
+                        
+
+
                     </div>
 
                 </div>
@@ -80,6 +80,7 @@
 
             <div class="shoppingKart">
                 <h1>Warenkorb</h1>
+                <div id="shoppingKartItem"></div>
 
             </div>
 

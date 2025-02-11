@@ -86,6 +86,10 @@
     width: 24px;
 }
 
+.menuButton {
+    cursor: pointer;
+}
+
 .menuDiv {
     padding: 10px;
     /* height: 100vh; */
