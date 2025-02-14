@@ -15,13 +15,15 @@ function getMenuTemplate(menuType, index) {
 
 function getKartTemplate(menuType, index) {
     return `
-                <h3 class="kartItemTitle" id="shoppingKartItemInsert">${menu[menuType].section[index].name}</h3>
+            <div id="${menuType + 'basketElementDiv' + index}">
+                <h3 class="kartItemTitle" id="${menuType + 'shoppingKartItemInsert' + index}">${menu[menuType].section[index].name}</h3>
                     <div class="sumDiv">
-                    <img class="addIcon" src="./assets/icons/minus.png" alt="minus">
-                    <div id="amount" value="1">1</div>
-                    <img class="addIcon" onclick="addAmount(${menuType},${index})" src="./assets/icons/plus.png" alt="plus">
-                    <div id="sum">${menu[menuType].section[index].price}</div>
-                    <img class="addIcon" src="./assets/icons/trash.png" alt="trash">
+                    <img class="addIcon" onclick='addAmount(${menuType},${index}, -1)' src="./assets/icons/minus.png" alt="minus">
+                    <div id="${menuType + 'amount' + index}" value='1'>1</div>
+                    <img class="addIcon" onclick='addAmount(${menuType},${index}, 1)' src="./assets/icons/plus.png" alt="plus">
+                    <div id="${menuType + 'sum' + index}">${menu[menuType].section[index].price}</div>
+                    <img class="addIcon" onclick='deleteAmount(${menuType},${index})' src="./assets/icons/trash.png" alt="trash">
                 </div>
+            </div>
             `;
 }
