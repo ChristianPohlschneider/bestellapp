@@ -1,13 +1,9 @@
 let menuRef = document.getElementById("tabMenuElement");
 let tabTitleRef = document.getElementById("tabTitle");
-
 let cartRef = document.getElementById("shoppingTemplateTarget");
-
 let shoppingKartSumRef = document.getElementById("shoppingKartSum");
 let totalSumRef = document.getElementById("totalSum");
 let shoppingKart = [];
-
-
 
 function init(menuType) {
     // onload: menuType = 0
@@ -15,7 +11,6 @@ function init(menuType) {
 }
 
 function renderMenu(menuType) {
-
     menuRef.innerHTML = "";
     tabTitleRef.innerHTML = "";
     for (let index = 0; index < menu[menuType].section.length; index++) {
@@ -29,44 +24,37 @@ function localStorage() {
 }
 
 function addToBasket(menuType, index) {
+    if (shoppingKart.length != 0) {
+        for (let doubleindex = 0; doubleindex < shoppingKart.length; doubleindex++) {
+            if (menu[menuType].section[index].name == shoppingKart[doubleindex].name) {
+                addAmount(menuType, index, 1);
+                return;
+            }
+        }
+        renderBasket(menuType, index);
+    }
+    else {
+        renderBasket(menuType, index);
+    }
+}
 
+function renderBasket(menuType, index) {
     cartRef.innerHTML += getKartTemplate(menuType, index);
-    let amountRef = document.getElementById(menuType + 'amount' + index);
-    let kartItem = menu[menuType].section[index];
-    let amount = parseFloat(amountRef.getAttribute('value'));
-    // Object.defineProperty(kartItem, 'amount', {
-    //     value: amount,
-    //     writable: true,
-    //     enumerable: true,
-    //     configurable: true
-
-    // });
-    // shoppingKart.push(kartItem);
-        Object.defineProperty(menu[menuType].section[index], 'amount', {
-        value: amount,
+    Object.defineProperty(menu[menuType].section[index], 'amount', {
+        value: parseFloat(document.getElementById(menuType + 'amount' + index).getAttribute('value')),
         writable: true,
         enumerable: true,
         configurable: true
-
     });
-    shoppingKart.push(kartItem);
-    
+    shoppingKart.push(menu[menuType].section[index]);
     calculateSum(menuType, index);
 }
 
 function calculateSum(menuType, index) {
-    
-    // let amount = parseFloat(document.getElementById(menuType + 'amount' + index).getAttribute('value'));
-    let amount = menu[menuType].section[index].amount;
     let sum = document.getElementById(menuType + 'sum' + index);
-    let amountRef = document.getElementById(menuType + 'amount' + index);
     let deliveryPrice = parseFloat(document.getElementById('deliveryPrice').getAttribute('value'));
     let subTotal = 0;
     let calculateValue = 0;
-
-    
-
-
     for (let indexSum = 0; indexSum < shoppingKart.length; indexSum++) {
         if (shoppingKart.length == 1) {
             calculateValue = shoppingKart[indexSum].price * shoppingKart[indexSum].amount;
@@ -74,45 +62,36 @@ function calculateSum(menuType, index) {
             subTotal = calculateValue + shoppingKart[indexSum].price * shoppingKart[indexSum].amount;
             calculateValue = parseFloat(subTotal.toFixed(2));
         }
-        
     }
-    
-    amountRef.innerHTML = amount;
+    document.getElementById(menuType + 'amount' + index).innerHTML = menu[menuType].section[index].amount;
     shoppingKartSumRef.innerHTML = calculateValue;
     sum.innerHTML = menu[menuType].section[index].amount * menu[menuType].section[index].price;
     let totalSum = deliveryPrice + calculateValue;
     totalSumRef.innerHTML = totalSum;
- }
-
-function addAmount(menuType, index, operator) {
-    // indexSum = shoppingKart.findIndex(shoppingAmount(x));
-    indexSum = findIndexSumIndex(shoppingKart, menu[menuType].section[index]);
-    shoppingKart[indexSum].amount = shoppingKart[indexSum].amount + operator;
-    let amountRef = document.getElementById(menuType + 'amount' + index);
-    amountRef.setAttribute('value', shoppingKart[indexSum].amount.toString());
-    amountRef.innerHTML = shoppingKart[indexSum].amount;
-    calculateSum(menuType, index);
-    
 }
 
-// function shoppingAmount(x) {
-//     let idName = document.getElementById('shoppingKartItemInsert').innerHTML;
-//     return x.name === idName;
-//   }
-// findElementIndex([10, 20, 30, 40], 30)
-  function findIndexSumIndex(array, element) {
-    // document.getElementById("findElementIndex").innerHTML = array.indexOf(element);
-    // console.log(array.indexOf(element));
-    return array.indexOf(element);} //gibt den return wert zurück
-
-    function deleteAmount(menuType, index) {
-        let amountRef = document.getElementById(menuType + 'amount' + index);
-        indexSum = findIndexSumIndex(shoppingKart, menu[menuType].section[index]);
-        shoppingKart[indexSum].amount = 0;
-        amountRef.setAttribute('value', 0);
-        // amountRef.innerHTML = "";
-        calculateSum(menuType, index);
-        document.getElementById(menuType + 'basketElementDiv' + index).remove();
+function addAmount(menuType, index, operator) {
+    indexSum = findIndexSumIndex(shoppingKart, menu[menuType].section[index]);
+    if (shoppingKart[indexSum].amount + operator == -1 || shoppingKart[indexSum].amount + operator > 50) {
+        return;
     }
+    else {
+        shoppingKart[indexSum].amount = shoppingKart[indexSum].amount + operator;
+        let amountRef = document.getElementById(menuType + 'amount' + index);
+        amountRef.setAttribute('value', shoppingKart[indexSum].amount.toString());
+        amountRef.innerHTML = shoppingKart[indexSum].amount;
+        calculateSum(menuType, index);
+    }
+}
 
-    // zweimal austern abfangen
+function findIndexSumIndex(array, element) {
+    return array.indexOf(element);
+}
+
+function deleteAmount(menuType, index) {
+    indexSum = findIndexSumIndex(shoppingKart, menu[menuType].section[index]);
+    shoppingKart.splice(indexSum, 1);
+    document.getElementById(menuType + 'amount' + index).setAttribute('value', 0);
+    calculateSum(menuType, index);
+    document.getElementById(menuType + 'basketElementDiv' + index).remove();
+}
