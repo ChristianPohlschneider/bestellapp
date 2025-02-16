@@ -9,6 +9,7 @@ let shoppingKart = [];
 function init(menuType) {
     // onload: menuType = 0
     renderMenu(menuType);
+    getlocalStorage();
 }
 
 function renderMenu(menuType) {
@@ -20,8 +21,33 @@ function renderMenu(menuType) {
     }
 }
 
-function localStorage() {
+function getlocalStorage() {
+    if (localStorage.getItem("shoppingKartStorage") == null) {
+        return
+    }
+    else {
+        shoppingKart = JSON.parse(localStorage.getItem("shoppingKartStorage"));
+        for (let storageIndex = 0; storageIndex < shoppingKart.length; storageIndex++) {
+            for (let x = 0; x < menu.length; x++) {
+                for (let y = 0; y < menu[x].section.length; y++) {
+                    if (menu[x].section[y].name === shoppingKart[storageIndex].name) {
+                        let menuType = x;
+                        let index = y;
+                        cartRef.innerHTML += getKartTemplate(menuType, index);
+                        defineAmount(menuType, index)
+                        calculateSum(menuType, index);
+                        document.getElementById(menuType + 'amount' + index).innerHTML = shoppingKart[storageIndex].amount;
+                        menu[menuType].section[index] = shoppingKart[storageIndex];
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
 
+function saveToLocalStorage() {
+    localStorage.setItem("shoppingKartStorage", JSON.stringify(shoppingKart));
 }
 
 function addToBasket(menuType, index) {
@@ -41,14 +67,20 @@ function addToBasket(menuType, index) {
 
 function renderBasket(menuType, index) {
     cartRef.innerHTML += getKartTemplate(menuType, index);
+    defineAmount(menuType, index)
+    shoppingKart.push(menu[menuType].section[index]);
+    calculateSum(menuType, index);
+    // local Storage
+    saveToLocalStorage(menuType, index);
+}
+
+function defineAmount(menuType, index) {
     Object.defineProperty(menu[menuType].section[index], 'amount', {
         value: parseFloat(document.getElementById(menuType + 'amount' + index).getAttribute('value')),
         writable: true,
         enumerable: true,
         configurable: true
     });
-    shoppingKart.push(menu[menuType].section[index]);
-    calculateSum(menuType, index);
 }
 
 function calculateSum(menuType, index) {
@@ -65,10 +97,10 @@ function calculateSum(menuType, index) {
         }
     }
     document.getElementById(menuType + 'amount' + index).innerHTML = menu[menuType].section[index].amount;
-    shoppingKartSumRef.innerHTML = calculateValue.toFixed(2).replace('.',',') + " €";
-    sum.innerHTML = ((menu[menuType].section[index].amount * menu[menuType].section[index].price).toFixed(2).replace('.',',')) + " €";
+    shoppingKartSumRef.innerHTML = calculateValue.toFixed(2).replace('.', ',') + " €";
+    sum.innerHTML = ((menu[menuType].section[index].amount * menu[menuType].section[index].price).toFixed(2).replace('.', ',')) + " €";
     let totalSum = deliveryPrice + calculateValue;
-    totalSumRef.innerHTML = totalSum.toFixed(2).replace('.',',') + " €";
+    totalSumRef.innerHTML = totalSum.toFixed(2).replace('.', ',') + " €";
 }
 
 function addAmount(menuType, index, operator) {
@@ -82,6 +114,8 @@ function addAmount(menuType, index, operator) {
         amountRef.setAttribute('value', shoppingKart[indexSum].amount.toString());
         amountRef.innerHTML = shoppingKart[indexSum].amount;
         calculateSum(menuType, index);
+        // local Storage
+        saveToLocalStorage(menuType, index)
     }
 }
 
@@ -95,11 +129,13 @@ function deleteAmount(menuType, index) {
     document.getElementById(menuType + 'amount' + index).setAttribute('value', 0);
     calculateSum(menuType, index);
     document.getElementById(menuType + 'basketElementDiv' + index).remove();
+    // local Storage
+    saveToLocalStorage(menuType, index)
 }
 
 function deliveryOrNot(operator) {
     deliveryPriceRef.setAttribute('value', operator.toFixed(2).toString());
-    deliveryPriceRef.innerHTML = deliveryPriceRef.getAttribute('value').replace('.',',') + " €";
-    let totalSum = parseFloat(shoppingKartSumRef.innerHTML.replace(',','.')) + operator;
-    totalSumRef.innerHTML = totalSum.toFixed(2).replace('.',',') + " €";
+    deliveryPriceRef.innerHTML = deliveryPriceRef.getAttribute('value').replace('.', ',') + " €";
+    let totalSum = parseFloat(shoppingKartSumRef.innerHTML.replace(',', '.')) + operator;
+    totalSumRef.innerHTML = totalSum.toFixed(2).replace('.', ',') + " €";
 }
