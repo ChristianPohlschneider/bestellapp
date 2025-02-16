@@ -2,6 +2,7 @@ let menuRef = document.getElementById("tabMenuElement");
 let tabTitleRef = document.getElementById("tabTitle");
 let cartRef = document.getElementById("shoppingTemplateTarget");
 let shoppingKartSumRef = document.getElementById("shoppingKartSum");
+let deliveryPriceRef = document.getElementById('deliveryPrice');
 let totalSumRef = document.getElementById("totalSum");
 let shoppingKart = [];
 
@@ -52,7 +53,7 @@ function renderBasket(menuType, index) {
 
 function calculateSum(menuType, index) {
     let sum = document.getElementById(menuType + 'sum' + index);
-    let deliveryPrice = parseFloat(document.getElementById('deliveryPrice').getAttribute('value'));
+    let deliveryPrice = parseFloat(deliveryPriceRef.getAttribute('value'));
     let subTotal = 0;
     let calculateValue = 0;
     for (let indexSum = 0; indexSum < shoppingKart.length; indexSum++) {
@@ -64,10 +65,10 @@ function calculateSum(menuType, index) {
         }
     }
     document.getElementById(menuType + 'amount' + index).innerHTML = menu[menuType].section[index].amount;
-    shoppingKartSumRef.innerHTML = calculateValue;
-    sum.innerHTML = menu[menuType].section[index].amount * menu[menuType].section[index].price;
+    shoppingKartSumRef.innerHTML = calculateValue.toFixed(2).replace('.',',') + " €";
+    sum.innerHTML = ((menu[menuType].section[index].amount * menu[menuType].section[index].price).toFixed(2).replace('.',',')) + " €";
     let totalSum = deliveryPrice + calculateValue;
-    totalSumRef.innerHTML = totalSum;
+    totalSumRef.innerHTML = totalSum.toFixed(2).replace('.',',') + " €";
 }
 
 function addAmount(menuType, index, operator) {
@@ -94,4 +95,11 @@ function deleteAmount(menuType, index) {
     document.getElementById(menuType + 'amount' + index).setAttribute('value', 0);
     calculateSum(menuType, index);
     document.getElementById(menuType + 'basketElementDiv' + index).remove();
+}
+
+function deliveryOrNot(operator) {
+    deliveryPriceRef.setAttribute('value', operator.toFixed(2).toString());
+    deliveryPriceRef.innerHTML = deliveryPriceRef.getAttribute('value').replace('.',',') + " €";
+    let totalSum = parseFloat(shoppingKartSumRef.innerHTML.replace(',','.')) + operator;
+    totalSumRef.innerHTML = totalSum.toFixed(2).replace('.',',') + " €";
 }

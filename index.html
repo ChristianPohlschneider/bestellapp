@@ -7,7 +7,7 @@
     <title>Bestell App</title>
     <link rel="shortcut icon" href="./assets/icons/favIcon.png" type="image/x-icon">
 
-   
+
     <script src="./scripts/menuArray.js"></script>
     <script src="./scripts/templates.js"></script>
     <link rel="stylesheet" href="./styles/styles.css">
@@ -80,14 +80,18 @@
 
             <div class="shoppingKart">
                 <h1>Warenkorb</h1>
+                <div class="deliveryDiv">
+                    <button id="delivery" class="deliveryButton" onclick="deliveryOrNot(2.5)">Lieferung</button>
+                    <button id="collection" class="deliveryButton" onclick="deliveryOrNot(0)">Abholung</button>
+                </div>
                 <div id="shoppingTemplateTarget" class="kartElement">
 
                 </div>
-                <h3 class="shoppingKartSum">Zwischensumme <div id="shoppingKartSum">0,00</div>
+                <h3 class="shoppingKartSum">Zwischensumme <div id="shoppingKartSum">0,00 €</div>
                 </h3>
-                <h3 class="shoppingKartSum">Lieferkosten <div id="deliveryPrice" value="0">0,00</div>
+                <h3 class="shoppingKartSum">Lieferkosten <div id="deliveryPrice" value="0.00">0,00 €</div>
                 </h3>
-                <h3 class="shoppingKartSum">Gesamtsumme <div id="totalSum">0,00</div>
+                <h3 class="shoppingKartSum">Gesamtsumme <div id="totalSum">0,00 €</div>
                 </h3>
             </div>
 
