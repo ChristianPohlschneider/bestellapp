@@ -6,8 +6,15 @@
 }
 
 .burgermenu {
-    height: 24px;
-    width: 24px;
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+}
+
+.burgermenu:hover {
+    cursor: pointer;
+    border: 2px solid rgb(230, 230, 230);
+    border-radius: 50%;
 }
 
 .leftSection {
@@ -82,6 +89,10 @@
     cursor: pointer;
 }
 
+.menuButton:hover {
+    color: rgb(255, 128, 0);
+}
+
 .menuDiv {
     padding: 10px;
     /* height: 100vh; */
@@ -95,6 +106,11 @@
     gap: 16px;
     border: 1px solid rgb(230, 230, 230);
     justify-content: space-between;
+    cursor: pointer;
+}
+
+.menuElement:hover {
+    background-color: rgba(255, 128, 0, 0.094);
 }
 
 .menuTitle {
@@ -113,6 +129,15 @@
     border-width: 0px 0px 1px 1px;
     position: sticky;
     top: 0;
+    cursor: pointer;
+}
+
+.addIcon:hover {
+    border: 2px solid rgb(255, 128, 0);
+}
+
+.buttonActive {
+    filter: drop-shadow(0px 0px 4px rgb(255, 128, 0));
 }
 
 .shoppingKart {
@@ -129,12 +154,17 @@
     width: 100%;
     height: 50px;
     flex-direction: row;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
 
 .deliveryButton {
     width: 134px;
+    cursor: pointer;
+}
+
+.deliveryButton:hover {
+    background-color: rgba(255, 128, 0, 0.094);
 }
 
 .sumDiv {

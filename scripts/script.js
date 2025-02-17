@@ -28,11 +28,11 @@ function getlocalStorage() {
     else {
         shoppingKart = JSON.parse(localStorage.getItem("shoppingKartStorage"));
         for (let storageIndex = 0; storageIndex < shoppingKart.length; storageIndex++) {
-            for (let x = 0; x < menu.length; x++) {
-                for (let y = 0; y < menu[x].section.length; y++) {
-                    if (menu[x].section[y].name === shoppingKart[storageIndex].name) {
-                        let menuType = x;
-                        let index = y;
+            for (let menuTypeIndex = 0; menuTypeIndex < menu.length; menuTypeIndex++) {
+                for (let menuIndex = 0; menuIndex < menu[menuTypeIndex].section.length; menuIndex++) {
+                    if (menu[menuTypeIndex].section[menuIndex].name === shoppingKart[storageIndex].name) {
+                        let menuType = menuTypeIndex;
+                        let index = menuIndex;
                         cartRef.innerHTML += getKartTemplate(menuType, index);
                         defineAmount(menuType, index)
                         calculateSum(menuType, index);
@@ -70,7 +70,6 @@ function renderBasket(menuType, index) {
     defineAmount(menuType, index)
     shoppingKart.push(menu[menuType].section[index]);
     calculateSum(menuType, index);
-    // local Storage
     saveToLocalStorage(menuType, index);
 }
 
@@ -81,6 +80,7 @@ function defineAmount(menuType, index) {
         enumerable: true,
         configurable: true
     });
+
 }
 
 function calculateSum(menuType, index) {
@@ -114,7 +114,6 @@ function addAmount(menuType, index, operator) {
         amountRef.setAttribute('value', shoppingKart[indexSum].amount.toString());
         amountRef.innerHTML = shoppingKart[indexSum].amount;
         calculateSum(menuType, index);
-        // local Storage
         saveToLocalStorage(menuType, index)
     }
 }
@@ -129,7 +128,6 @@ function deleteAmount(menuType, index) {
     document.getElementById(menuType + 'amount' + index).setAttribute('value', 0);
     calculateSum(menuType, index);
     document.getElementById(menuType + 'basketElementDiv' + index).remove();
-    // local Storage
     saveToLocalStorage(menuType, index)
 }
 
@@ -138,4 +136,11 @@ function deliveryOrNot(operator) {
     deliveryPriceRef.innerHTML = deliveryPriceRef.getAttribute('value').replace('.', ',') + " €";
     let totalSum = parseFloat(shoppingKartSumRef.innerHTML.replace(',', '.')) + operator;
     totalSumRef.innerHTML = totalSum.toFixed(2).replace('.', ',') + " €";
+}
+
+function toggleButtonClass(button) {
+    button.className = 'addIcon buttonActive';
+    setTimeout(function () {
+        button.className = 'addIcon';
+    }, 500);
 }
