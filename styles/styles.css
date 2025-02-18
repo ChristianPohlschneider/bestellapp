@@ -17,6 +17,15 @@
     border-radius: 50%;
 }
 
+/* burgermenu */
+.respMenuClosed {
+    transform: translateX(100%);
+}
+
+.respMenuBox {
+    display: none;
+}
+
 .leftSection {
     display: flex;
     flex-direction: column;
@@ -41,19 +50,35 @@
     padding-left: 12px;
 }
 
-.takeaway {
-
+.takeawayImg {
     background-color: white;
     height: 120px;
-    width: 100px;
-    bottom: 65px;
+    width: auto;
+    /* bottom: 65px; */
     left: calc(50vw - 208.5px);
     border-radius: 50%;
-    position: relative;
+    /* position: relative; */
+    position: absolute;
+    /* z-index: 1 !important; */
+    top: 165px;
+}
+
+.takeaway {
+
+    height: 1px;
+    width: 100px;
+    /* bottom: 65px; */
+
+    border-radius: 50%;
+    /* position: relative; */
+    /* position: absolute; */
+    /* z-index: 1 !important; */
+    top: 165px;
 }
 
 .takeawayDiv {
     height: 150px;
+    overflow-y: hidden;
 }
 
 .mainImg {
@@ -86,10 +111,15 @@
 }
 
 .menuButton {
+    text-decoration: none;
     cursor: pointer;
 }
 
-.menuButton:hover {
+.menuButton:hover,
+.activeLink {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 8px;
     color: rgb(255, 128, 0);
 }
 
@@ -163,6 +193,12 @@
     cursor: pointer;
 }
 
+.deliveryButton:hover,
+.activeButton {
+    width: 134px;
+    background-color: rgb(255, 128, 0);
+}
+
 .deliveryButton:hover {
     background-color: rgba(255, 128, 0, 0.094);
 }
@@ -208,4 +244,84 @@
     justify-content: space-between;
     align-items: center;
     color: white;
+}
+
+.footerLeft {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: white;
+    gap: 10px;
+}
+
+.footerLeft a {
+    color: white;
+}
+
+.footerLeft a:hover {
+    color: rgb(255, 128, 0);
+}
+
+.footerIcons {
+    height: 40px;
+    width: 40px;
+}
+
+.footerIcons:hover {
+    filter: drop-shadow(0px 0px 5px rgb(255, 128, 0));
+}
+
+.footerNav {
+    display: flex;
+    gap: 10px;
+}
+
+/* burgermenu */
+
+.burgerMobile {
+    display: none;
+}
+
+.respMenuClosed {
+    display: none;
+    transform: translateX(100%);
+}
+
+.respMenuBox {
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background-color: white;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    width: 200px;
+    transition: all 250ms ease-in-out;
+}
+
+@media (max-width: 900px) {
+    .respMenuBox {
+        display: flex;
+
+    }
+
+    .respMenuClosed {
+        display: flex;
+        transform: translateX(100%);
+    }
+
+    .burgerMobile {
+        display: flex;
+    }
+
+    .burgerMenuTable {
+        text-align: center;
+        font-size: 20px;
+        padding: 10px 0;
+        background-color: rgba(255, 128, 0, 0.094);
+    }
+
+    .burgerMenuTable:hover {
+        color: rgb(255, 128, 0);
+    }
 }

@@ -15,6 +15,7 @@
 </head>
 
 <body onload="init(0)">
+
     <!-- git add .  ||  git commit -m "first commit"    ||  git push
 
     ".gitignore" Deatei in vs-code erstellen
@@ -28,9 +29,15 @@
             <div class="headerDiv">
                 <h1>Bestell App</h1>
 
-                <img class="burgermenu" src="./assets/icons/burgermenuWhite.png" alt="Burgermenu">
+                <img onclick="toggleMenu('respMenu')" class="burgermenu burgerMobile"
+                    src="./assets/icons/burgermenuWhite.png" alt="Burgermenu">
             </div>
         </header>
+
+        <div id="respMenu" class="respMenuBox respMenuClosed">
+            <a class="burgerMenuTable" href="dataProtection.html">Datenschutz</a>
+            <a class="burgerMenuTable" href="impressum.html">Impressum</a>
+        </div>
 
         <section class="mainSection">
 
@@ -38,24 +45,30 @@
 
                 <div class="leftSectionHeader">
 
-                    <div class="takeawayDiv">
-                        <img class="mainImg" src="./assets/img/noodleSoup.png" alt="Noodle Soup">
-                        <img class="takeaway" src="./assets/icons/takeaway.png" alt="Noodles Icon">
 
-                    </div>
+                    <img class="mainImg" src="./assets/img/noodleSoup.png" alt="Noodle Soup">
+                    <div class="takeawayDiv">
+                        <div class="takeaway"><img class="takeawayImg" src="./assets/icons/takeaway.png"
+                            alt="Noodles Icon"></div>
+                        </div>
+                    
+
                     <h1 class="h1Header">Paradise Noodles</h1>
                     <a class="rating" href="#">Bewertung (4,5 von 5 Sternen)</a>
-
+             
                     <div class="tabDiv">
                         <img class="arrow" src="./assets/icons/arrow.png" alt="Arrow">
                         <div>
-                            <h3 class="menuButton" onclick="renderMenu(0)">Vorspeisen</h3>
+                            <h3 id="starter" class="activeLink menuButton"
+                                onclick="toggleLink('starter'), renderMenu(0)">Vorspeisen</h3>
                         </div>
                         <div>
-                            <h3 class="menuButton" onclick="renderMenu(1)">Hauptspeisen</h3>
+                            <h3 id="mainCourse" class="menuButton" onclick="toggleLink('mainCourse'), renderMenu(1)">
+                                Hauptspeisen</h3>
                         </div>
                         <div>
-                            <h3 class="menuButton" onclick="renderMenu(2)">Dessert</h3>
+                            <h3 id="dessert" class="menuButton" onclick="toggleLink('dessert'), renderMenu(2)">Dessert
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -75,8 +88,10 @@
             <div class="shoppingKart">
                 <h1>Warenkorb</h1>
                 <div class="deliveryDiv">
-                    <button id="delivery" class="deliveryButton" onclick="deliveryOrNot(2.5)">Lieferung</button>
-                    <button id="collection" class="deliveryButton" onclick="deliveryOrNot(0)">Abholung</button>
+                    <button id="delivery" class="deliveryButton"
+                        onclick="deliveryOrNot(2.5), toggleDeliveryButton('delivery')">Lieferung</button>
+                    <button id="collection" class="activeButton deliveryButton"
+                        onclick="deliveryOrNot(0), toggleDeliveryButton('collection')">Abholung</button>
                 </div>
                 <div id="shoppingTemplateTarget" class="kartElement">
 
@@ -92,7 +107,23 @@
         </section>
 
         <footer>
-            <div class="footerDiv">Christian Pohlschneier</div>
+            <div class="footerDiv">
+                <div class="footerLeft">
+                    <p>Christian Pohlschneier</p>
+                    <p>|</p>
+                    <a href="dataprotection.html">Datenschutz</a>
+                    <p>|</p>
+                    <a href="impressum.html">Impressum</a>
+                </div>
+                <div class="footerNav">
+                    <a href="https://www.facebook.com/" target="_blank"><img class="footerIcons"
+                            src="./assets/icons/facebook_white.png" alt="facebook" /></a>
+                    <a class="footerIcon" href="https://www.instagram.com/" target="_blank"><img class="footerIcons"
+                            src="./assets/icons/instagram_white.png" alt="instagram" /></a>
+                    <a class="footerIcon" href="https://x.com/" target="_blank"><img class="footerIcons"
+                            src="./assets/icons/twitter_white.png" alt="twitter" /></a>
+                </div>
+            </div>
         </footer>
     </div>
     <script src="./scripts/script.js"></script>

@@ -142,5 +142,29 @@ function toggleButtonClass(button) {
     button.className = 'addIcon buttonActive';
     setTimeout(function () {
         button.className = 'addIcon';
-    }, 500);
+    }, 200);
+}
+
+function toggleMenu(id) {
+    document.getElementById(id).classList.toggle('respMenuClosed');
+}
+
+function toggleLink(id) {
+    if (document.getElementById(id).className == "activeLink") {
+        return
+    } else {
+        document.getElementsByClassName("activeLink")[0].classList.remove('activeLink');
+        document.getElementById(id).classList.add('activeLink');
+        
+    }
+}
+
+function toggleDeliveryButton(id) {
+    if (document.getElementById(id).className == "activeButton") {
+        return
+    } else {
+        document.getElementsByClassName('activeButton')[0].classList.remove('activeButton');
+        document.getElementById(id).classList.add('activeButton');
+        
+    }
 }
