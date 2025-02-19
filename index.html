@@ -25,6 +25,7 @@
     /node modules0,
     -->
     <div class="mainDiv maxWidth">
+        <div id="respBasketTop" onclick="toggleBasket('respBasketTop')" class="respBasketClose">Warenkorb</div>
         <header>
             <div class="headerDiv">
                 <h1>Bestell App</h1>
@@ -45,17 +46,18 @@
 
                 <div class="leftSectionHeader">
 
+                    <div class="headerImg"></div>
 
-                    <img class="mainImg" src="./assets/img/noodleSoup.png" alt="Noodle Soup">
                     <div class="takeawayDiv">
-                        <div class="takeaway"><img class="takeawayImg" src="./assets/icons/takeaway.png"
-                            alt="Noodles Icon"></div>
-                        </div>
-                    
+                        <div class="takeAwayDivHeader">
 
-                    <h1 class="h1Header">Paradise Noodles</h1>
+                            <h1 class="h1Header">Paradise Noodles</h1>
+
+                        </div>
+                        <img class="takeawayImg" src="./assets/icons/takeaway.png" alt="Noodles Icon">
+
+                    </div>
                     <a class="rating" href="#">Bewertung (4,5 von 5 Sternen)</a>
-             
                     <div class="tabDiv">
                         <img class="arrow" src="./assets/icons/arrow.png" alt="Arrow">
                         <div>
@@ -67,25 +69,25 @@
                                 Hauptspeisen</h3>
                         </div>
                         <div>
-                            <h3 id="dessert" class="menuButton" onclick="toggleLink('dessert'), renderMenu(2)">Dessert
+                            <h3 id="dessert" class="menuButton" onclick="toggleLink('dessert'), renderMenu(2)">
+                                Dessert
                             </h3>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="menuDiv" id="menuDiv">
                     <img class="mainImg" src="./assets/img/food.jpg" alt="">
                     <h2 id="tabTitle">Pizza</h2>
-
                     <div id="tabMenuElement">
-
                     </div>
-
                 </div>
 
             </div>
 
             <div class="shoppingKart">
+                <div class="shoppingKartInlay">
                 <h1>Warenkorb</h1>
                 <div class="deliveryDiv">
                     <button id="delivery" class="deliveryButton"
@@ -102,6 +104,7 @@
                 </h3>
                 <h3 class="shoppingKartSum">Gesamtsumme <div id="totalSum">0,00 €</div>
                 </h3>
+            </div>
             </div>
 
         </section>
@@ -126,6 +129,7 @@
             </div>
         </footer>
     </div>
+    <div id="respBasket" onclick="toggleBasket('respBasket')" class="respBasket">Warenkorb</div>
     <script src="./scripts/script.js"></script>
 </body>
 

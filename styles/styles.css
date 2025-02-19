@@ -33,52 +33,64 @@
     flex-grow: 1;
 }
 
+.headerImg {
+    height: 150px;
+    background-image: url("/assets/img/noodleSoup.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
 .leftSectionHeader {
     display: flex;
-    gap: 16px;
-    overflow-x: visible;
     flex-direction: column;
 }
 
 .h1Header {
     padding-left: 12px;
+    padding-bottom: 10px;
 }
 
 .rating {
     color: rgb(255, 128, 0);
     font-weight: bold;
     padding-left: 12px;
+    padding-bottom: 8px;
 }
 
 .takeawayImg {
     background-color: white;
-    height: 120px;
-    width: auto;
-    /* bottom: 65px; */
-    left: calc(50vw - 208.5px);
+    height: 90px;
+    width: 75px;
     border-radius: 50%;
-    /* position: relative; */
-    position: absolute;
-    /* z-index: 1 !important; */
-    top: 165px;
+    position: relative;
+    z-index: 2 !important;
+    right: calc(50% - 35px);
 }
 
 .takeaway {
-
     height: 1px;
     width: 100px;
-    /* bottom: 65px; */
-
     border-radius: 50%;
-    /* position: relative; */
-    /* position: absolute; */
-    /* z-index: 1 !important; */
     top: 165px;
 }
 
 .takeawayDiv {
-    height: 150px;
+    width: 100%;
     overflow-y: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    bottom: 40px;
+}
+
+.takeAwayDivHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    top: 40px;
 }
 
 .mainImg {
@@ -92,7 +104,6 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    /* flex: 1; */
 }
 
 .tabDiv {
@@ -125,7 +136,6 @@
 
 .menuDiv {
     padding: 10px;
-    /* height: 100vh; */
     overflow-x: visible;
 }
 
@@ -157,7 +167,7 @@
     padding: 5px;
     border: 1px solid rgb(230, 230, 230);
     border-width: 0px 0px 1px 1px;
-    position: sticky;
+    position: relative;
     top: 0;
     cursor: pointer;
 }
@@ -172,11 +182,17 @@
 
 .shoppingKart {
     width: 300px;
+
+    padding-top: 16px;
+    box-shadow: 0px 0px 16px rgb(230, 230, 230);
+}
+
+.shoppingKartInlay {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 16px;
-    box-shadow: 0px 0px 16px rgb(230, 230, 230);
+    position: sticky;
+    top: 0;
 }
 
 .deliveryDiv {
@@ -299,10 +315,33 @@
     transition: all 250ms ease-in-out;
 }
 
+.respBasket {
+    display: none;
+}
+
+.respbasketActive {
+    font-Size: 20px;
+    font-weight: bold;
+    background-color: blue;
+    color: white;
+    display: flex;
+    position: sticky;
+    top: 0;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    border-radius: 10px;
+    margin: 8px;
+}
+
+.respBasketClose {
+    display: none;
+}
+
 @media (max-width: 900px) {
     .respMenuBox {
         display: flex;
-
     }
 
     .respMenuClosed {
@@ -323,5 +362,32 @@
 
     .burgerMenuTable:hover {
         color: rgb(255, 128, 0);
+    }
+
+    .shoppingKart {
+        transform: translateX(100%);
+        display: none;
+    }
+
+    .shoppingKartInlay {
+        transform: translateX(100%);
+    }
+
+    .respBasket {
+        font-Size: 20px;
+        font-weight: bold;
+        background-color: blue;
+        color: white;
+        display: flex;
+        position: sticky;
+        bottom: 8px;
+        top: 8px;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+        border-radius: 10px;
+        margin: 8px;
+        z-index: 1;
     }
 }

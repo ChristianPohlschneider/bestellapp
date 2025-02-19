@@ -155,7 +155,6 @@ function toggleLink(id) {
     } else {
         document.getElementsByClassName("activeLink")[0].classList.remove('activeLink');
         document.getElementById(id).classList.add('activeLink');
-        
     }
 }
 
@@ -165,6 +164,12 @@ function toggleDeliveryButton(id) {
     } else {
         document.getElementsByClassName('activeButton')[0].classList.remove('activeButton');
         document.getElementById(id).classList.add('activeButton');
-        
     }
+}
+
+function toggleBasket(id) {
+    document.getElementsByClassName('respBasketClose')[0].classList.toggle('respBasket');
+    document.getElementsByClassName('respBasketClose')[0].classList.remove('respBasketClose');
+    document.getElementById(id).classList.toggle('respBasket');
+    document.getElementById(id).classList.toggle('respBasketClose');
 }
