@@ -28,7 +28,7 @@
         <div id="respBasketTop" onclick="toggleBasket()" class="respBasketClose">Warenkorb</div>
         <header>
             <div class="headerDiv">
-                <h1>Bestell App</h1>
+                <h1><a class="h1White" href="index.html">Bestell App</a></h1>
                 <div class="headerNavDiv">
                     <a href="dataprotection.html">Datenschutz</a>
                     <a href="impressum.html">Impressum</a>
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="menuDiv" id="menuDiv">
-                    <img class="mainImg" src="./assets/img/food.jpg" alt="">
+                    <img class="mainImg" src="./assets/img/food.jpg" alt="food picture">
                     <h2 id="tabTitle">Pizza</h2>
                     <div id="tabMenuElement">
                     </div>
@@ -98,10 +98,14 @@
                             onclick="deliveryOrNot(2.5), toggleDeliveryButton('delivery')">Lieferung</button>
                         <button id="collection" class="activeButton deliveryButton"
                             onclick="deliveryOrNot(0), toggleDeliveryButton('collection')">Abholung</button>
+
                     </div>
+                    <div id="placeholderDiv" class="placeholderDiv">Wähle leckere Gerichte aus der Karte und bestelle
+                        Dein Menü.</div>
                     <div id="shoppingTemplateTarget" class="kartElement">
 
                     </div>
+
                     <h3 class="shoppingKartSum">Zwischensumme <div id="shoppingKartSum">0,00 €</div>
                     </h3>
                     <h3 class="shoppingKartSum">Lieferkosten <div id="deliveryPrice" value="0.00">0,00 €</div>
@@ -116,8 +120,6 @@
         <footer>
             <div class="footerDiv">
                 <div class="footerLeft">
-                    <p>Christian Pohlschneier</p>
-                    <p>|</p>
                     <a href="dataprotection.html">Datenschutz</a>
                     <p>|</p>
                     <a href="impressum.html">Impressum</a>

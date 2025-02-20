@@ -10,6 +10,7 @@ function init(menuType) {
     // onload: menuType = 0
     renderMenu(menuType);
     getlocalStorage();
+    togglePlaceholder();
 }
 
 function renderMenu(menuType) {
@@ -19,6 +20,7 @@ function renderMenu(menuType) {
         tabTitleRef.innerHTML = menu[menuType].tabTitle;
         menuRef.innerHTML += getMenuTemplate(menuType, index);
     }
+    
 }
 
 function getlocalStorage() {
@@ -51,7 +53,7 @@ function saveToLocalStorage() {
 }
 
 function addToBasket(menuType, index) {
-    if (shoppingKart.length != 0) {
+    if (shoppingKart.length > 0) {
         for (let doubleindex = 0; doubleindex < shoppingKart.length; doubleindex++) {
             if (menu[menuType].section[index].name == shoppingKart[doubleindex].name) {
                 addAmount(menuType, index, 1);
@@ -63,6 +65,7 @@ function addToBasket(menuType, index) {
     else {
         renderBasket(menuType, index);
     }
+    togglePlaceholder();
 }
 
 function renderBasket(menuType, index) {
@@ -129,6 +132,7 @@ function deleteAmount(menuType, index) {
     calculateSum(menuType, index);
     document.getElementById(menuType + 'basketElementDiv' + index).remove();
     saveToLocalStorage(menuType, index)
+    togglePlaceholder();
 }
 
 function deliveryOrNot(operator) {
@@ -177,4 +181,15 @@ function toggleBasket() {
     document.getElementById('shoppingKart').classList.toggle('shoppingKartOpen');
     document.getElementById('shoppingKartInlay').classList.toggle('shoppingKartInlay');
     document.getElementById('shoppingKartInlay').classList.toggle('shoppingKartInlayOpen');
+}
+
+function togglePlaceholder() {
+    if (document.getElementsByClassName('kartItemTitle')[0] != undefined) {
+        document.getElementById('placeholderDiv').classList.add('placeholderClosed');
+        document.getElementById('placeholderDiv').classList.remove('placeholderDiv');
+    }
+    else {
+        document.getElementById('placeholderDiv').classList.remove('placeholderClosed');
+        document.getElementById('placeholderDiv').classList.add('placeholderDiv');
+    }
 }
