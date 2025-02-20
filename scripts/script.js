@@ -167,9 +167,14 @@ function toggleDeliveryButton(id) {
     }
 }
 
-function toggleBasket(id) {
-    document.getElementsByClassName('respBasketClose')[0].classList.toggle('respBasket');
-    document.getElementsByClassName('respBasketClose')[0].classList.remove('respBasketClose');
-    document.getElementById(id).classList.toggle('respBasket');
-    document.getElementById(id).classList.toggle('respBasketClose');
+function toggleBasket() {
+    document.getElementById('respBasketTop').classList.toggle('respBasketTop');
+    document.getElementById('respBasketTop').classList.toggle('respBasketClose');
+    document.getElementById('respBasket').classList.toggle('respBasket');
+    document.getElementById('respBasket').classList.toggle('respBasketClose');
+
+    document.getElementById('shoppingKart').classList.toggle('shoppingKart');
+    document.getElementById('shoppingKart').classList.toggle('shoppingKartOpen');
+    document.getElementById('shoppingKartInlay').classList.toggle('shoppingKartInlay');
+    document.getElementById('shoppingKartInlay').classList.toggle('shoppingKartInlayOpen');
 }

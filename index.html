@@ -25,10 +25,14 @@
     /node modules0,
     -->
     <div class="mainDiv maxWidth">
-        <div id="respBasketTop" onclick="toggleBasket('respBasketTop')" class="respBasketClose">Warenkorb</div>
+        <div id="respBasketTop" onclick="toggleBasket()" class="respBasketClose">Warenkorb</div>
         <header>
             <div class="headerDiv">
                 <h1>Bestell App</h1>
+                <div class="headerNavDiv">
+                    <a href="dataprotection.html">Datenschutz</a>
+                    <a href="impressum.html">Impressum</a>
+                </div>
 
                 <img onclick="toggleMenu('respMenu')" class="burgermenu burgerMobile"
                     src="./assets/icons/burgermenuWhite.png" alt="Burgermenu">
@@ -86,25 +90,25 @@
 
             </div>
 
-            <div class="shoppingKart">
-                <div class="shoppingKartInlay">
-                <h1>Warenkorb</h1>
-                <div class="deliveryDiv">
-                    <button id="delivery" class="deliveryButton"
-                        onclick="deliveryOrNot(2.5), toggleDeliveryButton('delivery')">Lieferung</button>
-                    <button id="collection" class="activeButton deliveryButton"
-                        onclick="deliveryOrNot(0), toggleDeliveryButton('collection')">Abholung</button>
-                </div>
-                <div id="shoppingTemplateTarget" class="kartElement">
+            <div id="shoppingKart" class="shoppingKart">
+                <div id="shoppingKartInlay" class="shoppingKartInlay">
+                    <h1>Warenkorb</h1>
+                    <div class="deliveryDiv">
+                        <button id="delivery" class="deliveryButton"
+                            onclick="deliveryOrNot(2.5), toggleDeliveryButton('delivery')">Lieferung</button>
+                        <button id="collection" class="activeButton deliveryButton"
+                            onclick="deliveryOrNot(0), toggleDeliveryButton('collection')">Abholung</button>
+                    </div>
+                    <div id="shoppingTemplateTarget" class="kartElement">
 
+                    </div>
+                    <h3 class="shoppingKartSum">Zwischensumme <div id="shoppingKartSum">0,00 €</div>
+                    </h3>
+                    <h3 class="shoppingKartSum">Lieferkosten <div id="deliveryPrice" value="0.00">0,00 €</div>
+                    </h3>
+                    <h3 class="shoppingKartSum">Gesamtsumme <div id="totalSum">0,00 €</div>
+                    </h3>
                 </div>
-                <h3 class="shoppingKartSum">Zwischensumme <div id="shoppingKartSum">0,00 €</div>
-                </h3>
-                <h3 class="shoppingKartSum">Lieferkosten <div id="deliveryPrice" value="0.00">0,00 €</div>
-                </h3>
-                <h3 class="shoppingKartSum">Gesamtsumme <div id="totalSum">0,00 €</div>
-                </h3>
-            </div>
             </div>
 
         </section>
@@ -129,7 +133,7 @@
             </div>
         </footer>
     </div>
-    <div id="respBasket" onclick="toggleBasket('respBasket')" class="respBasket">Warenkorb</div>
+    <div id="respBasket" onclick="toggleBasket()" class="respBasket">Warenkorb</div>
     <script src="./scripts/script.js"></script>
 </body>
 
