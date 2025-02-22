@@ -7,7 +7,6 @@ let totalSumRef = document.getElementById("totalSum");
 let shoppingKart = [];
 
 function init(menuType) {
-    // onload: menuType = 0
     renderMenu(menuType);
     getlocalStorage();
     togglePlaceholder();
@@ -20,7 +19,6 @@ function renderMenu(menuType) {
         tabTitleRef.innerHTML = menu[menuType].tabTitle;
         menuRef.innerHTML += getMenuTemplate(menuType, index);
     }
-    
 }
 
 function getlocalStorage() {
@@ -31,39 +29,38 @@ function getlocalStorage() {
         shoppingKart = JSON.parse(localStorage.getItem("shoppingKartStorage"));
         for (let storageIndex = 0; storageIndex < shoppingKart.length; storageIndex++) {
             for (let menuTypeIndex = 0; menuTypeIndex < menu.length; menuTypeIndex++) {
-                for (let menuIndex = 0; menuIndex < menu[menuTypeIndex].section.length; menuIndex++) {
-                    if (menu[menuTypeIndex].section[menuIndex].name === shoppingKart[storageIndex].name) {
-                        let menuType = menuTypeIndex;
-                        let index = menuIndex;
-                        cartRef.innerHTML += getKartTemplate(menuType, index);
-                        defineAmount(menuType, index)
-                        calculateSum(menuType, index);
-                        document.getElementById(menuType + 'amount' + index).innerHTML = shoppingKart[storageIndex].amount;
-                        menu[menuType].section[index] = shoppingKart[storageIndex];
-                        break;
-                    }
-                }
-            }
-        }
-    }
+                findMenuTypeIndex(storageIndex, menuTypeIndex, shoppingKart)
+            }}}
+}
+
+function findMenuTypeIndex(storageIndexA, menuTypeIndexA, shoppingKartA) {
+    for (let menuIndex = 0; menuIndex < menu[menuTypeIndexA].section.length; menuIndex++) {
+        if (menu[menuTypeIndexA].section[menuIndex].name === shoppingKartA[storageIndexA].name) {
+            let menuType = menuTypeIndexA;
+            let index = menuIndex;
+            cartRef.innerHTML += getKartTemplate(menuType, index);
+            defineAmount(menuType, index);
+            document.getElementById(menuType + 'amount' + index).innerHTML = shoppingKartA[storageIndexA].amount;
+            menu[menuType].section[index] = shoppingKartA[storageIndexA];
+            calculateSum(menuType, index);
+            break;}}
 }
 
 function saveToLocalStorage() {
     localStorage.setItem("shoppingKartStorage", JSON.stringify(shoppingKart));
 }
 
-function addToBasket(menuType, index) {
+function addToBasket(menuType, index, operator) {
     if (shoppingKart.length > 0) {
         for (let doubleindex = 0; doubleindex < shoppingKart.length; doubleindex++) {
             if (menu[menuType].section[index].name == shoppingKart[doubleindex].name) {
-                addAmount(menuType, index, 1);
-                return;
-            }
-        }
+                addAmount(menuType, index, operator);
+                return;}}
         renderBasket(menuType, index);
-    }
-    else {
+        toggleButtonClass(0 + "button" + menuType + 'icon' + index);
+    } else {
         renderBasket(menuType, index);
+        toggleButtonClass(0 + "button" + menuType + 'icon' + index);
     }
     togglePlaceholder();
 }
@@ -83,12 +80,9 @@ function defineAmount(menuType, index) {
         enumerable: true,
         configurable: true
     });
-
 }
 
 function calculateSum(menuType, index) {
-    let sum = document.getElementById(menuType + 'sum' + index);
-    let deliveryPrice = parseFloat(deliveryPriceRef.getAttribute('value'));
     let subTotal = 0;
     let calculateValue = 0;
     for (let indexSum = 0; indexSum < shoppingKart.length; indexSum++) {
@@ -97,28 +91,54 @@ function calculateSum(menuType, index) {
         } else {
             subTotal = calculateValue + shoppingKart[indexSum].price * shoppingKart[indexSum].amount;
             calculateValue = parseFloat(subTotal.toFixed(2));
-        }
-    }
+        }}
     document.getElementById(menuType + 'amount' + index).innerHTML = menu[menuType].section[index].amount;
-    shoppingKartSumRef.innerHTML = calculateValue.toFixed(2).replace('.', ',') + " €";
+    renderSum(menuType, index, calculateValue);
+}
+
+function renderSum(menuType, index, calculateValueA) {
+    let sum = document.getElementById(menuType + 'sum' + index);
+    let deliveryPrice = parseFloat(deliveryPriceRef.getAttribute('value'));
+    shoppingKartSumRef.innerHTML = calculateValueA.toFixed(2).replace('.', ',') + " €";
     sum.innerHTML = ((menu[menuType].section[index].amount * menu[menuType].section[index].price).toFixed(2).replace('.', ',')) + " €";
-    let totalSum = deliveryPrice + calculateValue;
+    let totalSum = deliveryPrice + calculateValueA;
     totalSumRef.innerHTML = totalSum.toFixed(2).replace('.', ',') + " €";
+    document.getElementById("respBasket").innerHTML = "Warenkorb Summe: " + totalSum + " €";
+    document.getElementById("respBasketTop").innerHTML = "Warenkorb Summe: " + totalSum + " €";
 }
 
 function addAmount(menuType, index, operator) {
     indexSum = findIndexSumIndex(shoppingKart, menu[menuType].section[index]);
     if (shoppingKart[indexSum].amount + operator == -1 || shoppingKart[indexSum].amount + operator > 50) {
         return;
-    }
-    else {
-        shoppingKart[indexSum].amount = shoppingKart[indexSum].amount + operator;
+    } else {
         let amountRef = document.getElementById(menuType + 'amount' + index);
-        amountRef.setAttribute('value', shoppingKart[indexSum].amount.toString());
-        amountRef.innerHTML = shoppingKart[indexSum].amount;
-        calculateSum(menuType, index);
-        saveToLocalStorage(menuType, index)
+        if (amountRef.innerHTML == 1 && operator == -1) {
+            deleteAmount(menuType, index);
+        } else {
+            addAmountCalculation(menuType, index, operator)
+        }}
+}
+
+function addAmountCalculation(menuType, index, operator) {
+ if (operator == 0) {
+        operator = 1;
+        toggleButtonClass(0 + "button" + menuType + 'icon' + index);
+        shoppingKart[indexSum].amount = shoppingKart[indexSum].amount + operator;
+        renderAddAmount(menuType, index)
+    } else {
+        toggleButtonClass(operator + 'button' + menuType + 'icon' + index);
+        shoppingKart[indexSum].amount = shoppingKart[indexSum].amount + operator;
+        renderAddAmount(menuType, index)
     }
+}
+
+function renderAddAmount(menuType, index) {
+    let amountRef = document.getElementById(menuType + 'amount' + index);
+    amountRef.setAttribute('value', shoppingKart[indexSum].amount.toString());
+    amountRef.innerHTML = shoppingKart[indexSum].amount;
+    calculateSum(menuType, index);
+    saveToLocalStorage(menuType, index);
 }
 
 function findIndexSumIndex(array, element) {
@@ -143,9 +163,12 @@ function deliveryOrNot(operator) {
 }
 
 function toggleButtonClass(button) {
-    button.className = 'addIcon buttonActive';
+    if (button == undefined) {
+        return;
+    }
+    document.getElementById(button).classList.add('buttonActive');
     setTimeout(function () {
-        button.className = 'addIcon';
+        document.getElementById(button).classList.remove('buttonActive');
     }, 200);
 }
 
@@ -176,7 +199,6 @@ function toggleBasket() {
     document.getElementById('respBasketTop').classList.toggle('respBasketClose');
     document.getElementById('respBasket').classList.toggle('respBasket');
     document.getElementById('respBasket').classList.toggle('respBasketClose');
-
     document.getElementById('shoppingKart').classList.toggle('shoppingKart');
     document.getElementById('shoppingKart').classList.toggle('shoppingKartOpen');
     document.getElementById('shoppingKartInlay').classList.toggle('shoppingKartInlay');
@@ -187,9 +209,34 @@ function togglePlaceholder() {
     if (document.getElementsByClassName('kartItemTitle')[0] != undefined) {
         document.getElementById('placeholderDiv').classList.add('placeholderClosed');
         document.getElementById('placeholderDiv').classList.remove('placeholderDiv');
-    }
-    else {
+    } else {
         document.getElementById('placeholderDiv').classList.remove('placeholderClosed');
         document.getElementById('placeholderDiv').classList.add('placeholderDiv');
     }
 }
+
+function order() {
+    for (let index = 0; index < shoppingKart.length; index++) {
+        if (shoppingKart.length == 0) {
+             return
+        } else {
+        shoppingKart.splice(index, 1);
+        localStorage.removeItem('shoppingKartStorage');
+    }
+    document.getElementById('shoppingTemplateTarget').innerHTML = ""
+    document.getElementById('shoppingKartSum').innerHTML = "0,00 €"
+    document.getElementById('totalSum').innerHTML = "0,00 €"
+    document.getElementById('deliveryPrice').innerHTML = "0,00 €"
+    document.getElementById("respBasket").innerHTML = "Warenkorb Summe: " + "0,00 €";
+    document.getElementById("respBasketTop").innerHTML = "Warenkorb Summe: " + "0,00 €";
+    togglePlaceholder();
+    on()}
+}
+
+function on() {
+    document.getElementById("overlay").style.display = "block";
+  }
+  
+  function off() {
+    document.getElementById("overlay").style.display = "none";
+  }

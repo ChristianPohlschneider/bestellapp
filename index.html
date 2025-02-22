@@ -16,15 +16,8 @@
 
 <body onload="init(0)">
 
-    <!-- git add .  ||  git commit -m "first commit"    ||  git push
-
-    ".gitignore" Deatei in vs-code erstellen
-    zum anzeigen der Dateien: git status ins terminal eingeben
-    Dateien in .gitignore reinschreiben:
-    passwörter.txt
-    /node modules0,
-    -->
     <div class="mainDiv maxWidth">
+
         <div id="respBasketTop" onclick="toggleBasket()" class="respBasketClose">Warenkorb</div>
         <header>
             <div class="headerDiv">
@@ -112,6 +105,7 @@
                     </h3>
                     <h3 class="shoppingKartSum">Gesamtsumme <div id="totalSum">0,00 €</div>
                     </h3>
+                    <button onclick="order()" class="deliveryButton">Bestellung abgeben</button>
                 </div>
             </div>
 
@@ -136,6 +130,12 @@
         </footer>
     </div>
     <div id="respBasket" onclick="toggleBasket()" class="respBasket">Warenkorb</div>
+    <div class="overlay" id="overlay">
+        <div class="overlayInlet">
+            <h2>Ihre Bestellung wird bearbeitet!</h2>
+            <button onclick="off()" class="deliveryButton">Fenster schließen</button>
+        </div>
+    </div>
     <script src="./scripts/script.js"></script>
 </body>
 
