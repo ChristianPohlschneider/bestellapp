@@ -217,12 +217,10 @@ function togglePlaceholder() {
 
 function order() {
     for (let index = 0; index < shoppingKart.length; index++) {
-        if (shoppingKart.length == 0) {
-             return
+        if (shoppingKart.length == 0) { return
         } else {
         shoppingKart.splice(index, 1);
-        localStorage.removeItem('shoppingKartStorage');
-    }
+        localStorage.removeItem('shoppingKartStorage');}
     document.getElementById('shoppingTemplateTarget').innerHTML = ""
     document.getElementById('shoppingKartSum').innerHTML = "0,00 €"
     document.getElementById('totalSum').innerHTML = "0,00 €"
@@ -230,8 +228,7 @@ function order() {
     document.getElementById("respBasket").innerHTML = "Warenkorb Summe: " + "0,00 €";
     document.getElementById("respBasketTop").innerHTML = "Warenkorb Summe: " + "0,00 €";
     togglePlaceholder();
-    on()}
-}
+    on()}}
 
 function on() {
     document.getElementById("overlay").style.display = "block";
@@ -239,4 +236,5 @@ function on() {
   
   function off() {
     document.getElementById("overlay").style.display = "none";
+    location.reload();
   }
